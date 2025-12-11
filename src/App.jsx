@@ -6,10 +6,14 @@ import Laskuri from './Laskuri'
 import Viesti from './Viesti'
 import Posts from './Posts'
 import CustomerList  from './CustomerList'
+import Message from './Message'
 
 const App = () => {
 
 const [showLaskuri, setShowLaskuri] = useState(false)
+const [showMessage, setShowMessage] = useState(false)
+const [message, setMessage] = useState('')
+const [isPositive, setIsPositive] = useState(true)
 
 const huomio = () => {
   alert("Huomio!")
@@ -17,9 +21,11 @@ const huomio = () => {
 
   return (
     <div className="App">
-      <h1>Terve Reactista!</h1>
+      <h1>Hello from React!</h1>
 
-        <CustomerList/>
+        {showMessage && <Message message={message} isPositive={isPositive}/> } 
+
+        <CustomerList setIsPositive={setIsPositive} setMessage={setMessage} setShowMessage={setShowMessage}/>
 
         <Posts/>
         

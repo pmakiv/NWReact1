@@ -4,7 +4,7 @@ import React, {useState} from 'react'
 import './App.css'
 import CustomerService from './services/Customer'
 
-const CustomerAdd = ({setLisaystila}) => {
+const CustomerAdd = ({setLisaystila, setIsPositive, setShowMessage, setMessage}) => {
 
     const [newCustomerId, setNewCustomerId] = useState('');
     const [newCompanyName, setNewCompanyName] = useState('');
@@ -37,12 +37,22 @@ const CustomerAdd = ({setLisaystila}) => {
         CustomerService.create(newCustomer)
         .then(response => {
             if (response.status === 200) {
-                alert("Added new customer: " + newCustomer.CompanyName)
+                setMessage("Added new customer: " + newCustomer.CompanyName)
+                setIsPositive(true)
+                setShowMessage(true)
+                setTimeout(() => {
+                    setShowMessage(false)
+                }, 5000)
                 setLisaystila(false)
             }
         })
         .catch(error => {
-            alert("Error")
+            setMessage("Error, something went wrong.")
+            setIsPositive(false)
+            setShowMessage(true)
+            setTimeout(() => {
+                setShowMessage(false)
+            }, 6000)
     })
         }
   return (

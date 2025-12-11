@@ -2,18 +2,61 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import React, {useState} from 'react'
 import './App.css'
+import CustomerService from './services/Customer'
+import CustomerEdit from './CustomerEdit'
 
-const Customer = ({customer}) => {
+const Customer = ({customer, editCustomer, setIsPositive, setShowMessage, setMessage, reload, reloadNow}) => {
 
 const [showDetails, setShowDetails] = useState(false)
 
+const deleteCustomer = (customer) => {
+    //vaihtoehtoinen toteutustapa:
+    // if (window.confirm(`Remove customer ${customer.companyName}?`) === true) {
+    let answer = window.confirm(`Remove customer ${customer.companyName}?`)
+    if (answer === true) {
+    CustomerService.remove(customer.customerId)
+    .then(res => {
+        if (res.status === 200) {
+          setMessage(`Removed customer ${customer.companyName} successfully.`)  
+            setIsPosivite(true)
+            setShowMessage(true)
+            window.scrollBy(0, -10000)
+              setTimeout(() => {
+                setShowMessage(false)
+            }, 5000)
+            reloadNow(!reload)
+        }
+    }
+    )
+    .catch(error => {
+            setMessage(error)
+            setIsPositive(false)
+            setShowMessage(true)
+            setTimeout(() => {
+                setShowMessage(false)
+            }, 5000)
+        })
+    }
+    else {
+        setMessage('Deleting cancelled successfully.')
+        setIsPositive(true)
+        setShowMessage(true)
+        window.scrollBy(0, -10000)
+        setTimeout (() => {
+            setShowMessage(false)},
+            5000)
+        }
+        
+    }
+
+
   return (
     <div className='customerDiv'>
-     {/* <h4 onMouseEnter={() => setShowDetails(true)}
-        onMouseLeave={() => setShowDetails(false)}> */}
         <h4 onClick={() => setShowDetails (!showDetails)}>{customer.companyName}</h4>
-
     {showDetails && <div className='customerDetails'>
+        {customer.companyName}<br/>
+        <button onClick={() => editCustomer(customer)}>Edit</button>
+        <button onClick={() => deleteCustomer(customer)}>Delete</button>
         <table>
             <thead>
                 <tr>
