@@ -60,36 +60,47 @@ const CustomerEdit = ({setMuokkaustila, muokattavaCustomer, setIsPositive, setSh
         <h2>Edit customer:</h2>
 
         <form onSubmit={handleSubmit}>
+            <label>CustomerID (not changeable)</label>
             <div>
                 <input type='text' value={editCustomerId} disabled/>
             </div>
+            <label>Company name</label>
             <div>
                 <input type='text' value={editCompanyName} onChange={({target}) => setNewCompanyName(target.value)} placeholder='Company name'/>
             </div>
+            <label>Contact name</label>
             <div>
                 <input type='text' value={editContactName} onChange={({target}) => setNewContactName(target.value)} placeholder='Contact name'/>
             </div>
+            <label>Contact title</label>
             <div>
                 <input type='text' value={editContactTitle} onChange={({target}) => setNewContactTitle(target.value)} placeholder='Contact title'/>
             </div>
+            <label>Address</label>
             <div>
                 <input type='text' value={editAddress} onChange={({target}) => setNewAddress(target.value)} placeholder='Address'/>
             </div>
+            <label>City</label>
             <div>
                 <input type='text' value={editCity} onChange={({target}) => setNewCity(target.value)} placeholder='City'/>
             </div>
+            <label>Region</label>
             <div>
                 <input type='text' value={editRegion} onChange={({target}) => setNewRegion(target.value)} placeholder='Region'/>
             </div>
+            <label>Postal code</label>
             <div>
                 <input type='text' value={editPostalCode} onChange={({target}) => setNewPostalCode(target.value)} placeholder='Postalcode'/>
             </div>
+            <label>Country</label>
             <div>
                 <input type='text' value={editCountry} onChange={({target}) => setNewCountry(target.value)} placeholder='Country'/>
             </div>
+            <label>Phone</label>
             <div>
                 <input type='text' value={editPhone} onChange={({target}) => setNewPhone(target.value)} placeholder='Phone'/>
             </div>
+            <label>Fax</label>
             <div>
                 <input type='text' value={editFax} onChange={({target}) => setNewFax(target.value)} placeholder='Fax'/>
             </div>

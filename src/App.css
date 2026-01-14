@@ -28,6 +28,10 @@
   padding-right: 30px;
 }
 
+#userTable {
+  margin: auto;
+}
+
 .neg {
   color: red;
   background: lightgrey;
