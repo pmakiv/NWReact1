@@ -65,7 +65,7 @@ const Login = ({setIsPositive, setShowMessage, setMessage}) => {
                 <input type='password' value={PassWord} onChange={({target}) => setPassWord(target.value)} placeholder='Password'/>
             </div>
             <input type='submit' value='Login'/>
-            <input type='button' value='Empty' onClick={() => emptyFields}/>
+            <input type='button' value='Empty' onClick={() => emptyFields()}/>
         </form>
 
     </div>

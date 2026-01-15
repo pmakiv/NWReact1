@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -17,7 +17,7 @@ import Login from './Login'
 const App = () => {
 
 const [showLaskuri, setShowLaskuri] = useState(false)
-const [showMessage, setShowMessage] = useState(false)
+const [showMessage, setShowMessage] = useState('')
 const [message, setMessage] = useState('')
 const [isPositive, setIsPositive] = useState(true)
 const [loggedInUser, setLoggedInUser] = useState('')
@@ -26,11 +26,26 @@ const huomio = () => {
   alert("Huomio!")
 } 
 
+useEffect(() => {
+  let storedUser = localStorage.getItem("UserName")
+  if (storedUser !== null) {
+    setLoggedInUser(storedUser)
+  }
+},[])
+
+const logOut = () => {
+  localStorage.clear()
+  setLoggedInUser('')
+}
+
   return (
     <div className="App">
 
-      <Login setMessage={setMessage} setIsPositive={setIsPositive} setShowMessage={setShowMessage}/>
+      {/* {!loggedInUser && */}
+       <Login setMessage={setMessage} setIsPositive={setIsPositive} setShowMessage={setShowMessage}/>
+       {/* } */}
 
+      {/* {loggedInUser && */}
       <Router>
         <Navbar bg="dark" variant="dark">
           <Nav className="navi">
@@ -54,6 +69,7 @@ const huomio = () => {
       </Routes>
       </Router>
 
+      {/* } */}
     </div>
   )
 }
