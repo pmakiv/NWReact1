@@ -16,6 +16,9 @@ const [reload, reloadNow] = useState(false)
 const [muokattavaUser, setMuokattavaUser] = useState(false)
 const [search, setSearch] = useState("")
 
+        const token = localStorage.getItem('token')
+        CustomerService.setToken(token)
+
 useEffect(()=> {
   
     UserService.getAll()

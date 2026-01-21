@@ -34,6 +34,10 @@ const CustomerEdit = ({setMuokkaustila, muokattavaCustomer, setIsPositive, setSh
             Phone: editPhone,
             Fax: editFax
         }
+
+const token = localStorage.getItem('token')
+        CustomerService.setToken(token)
+
         CustomerService.update(editCustomer)
         .then(response => {
             if (response.status === 200) {

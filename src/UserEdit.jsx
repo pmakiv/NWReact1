@@ -23,6 +23,10 @@ const UserEdit = ({setMuokkaustila, muokattavaUser, setIsPositive, setShowMessag
             AccessLevelId: editAccessLevelId,
             UserName: editUserName,
         }
+
+        const token = localStorage.getItem('token')
+        CustomerService.setToken(token)
+
         UserService.update(editUser)
         .then(response => {
             if (response.status === 200) {

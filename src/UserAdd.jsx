@@ -27,6 +27,9 @@ const UserAdd = ({setLisaystila, setIsPositive, setShowMessage, setMessage}) => 
         }
         console.log(newUser)
 
+        const token = localStorage.getItem('token')
+                CustomerService.setToken(token)
+
         UserService.create(newUser)
         .then(response => {
             if (response.status === 200) {

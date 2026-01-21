@@ -34,6 +34,10 @@ const CustomerAdd = ({setLisaystila, setIsPositive, setShowMessage, setMessage})
             Phone: newPhone,
             Fax: newFax
         }
+
+        const token = localStorage.getItem('token')
+        CustomerService.setToken(token)
+
         CustomerService.create(newCustomer)
         .then(response => {
             if (response.status === 200) {

@@ -5,31 +5,31 @@ import './App.css'
 import LoginService from './services/Auth'
 import md5 from 'md5'
 
-const Login = ({setIsPositive, setShowMessage, setMessage}) => {
+const Login = ({setIsPositive, setShowMessage, setMessage, setLoggedInUser}) => {
 
-    const [UserName, setUserName] = useState('');
-    const [PassWord, setPassWord] = useState('');
+    const [userName, setUserName] = useState('');
+    const [passWord, setPassWord] = useState('');
 
     const handleSubmit = (event) => {
         event.preventDefault();
         var userForAuth = {
-            userName: UserName,
-            passWord: md5(PassWord)
+            userName: userName,
+            passWord: md5(passWord)
         }
 
         LoginService.authenticate(userForAuth)
         .then(response => {
             if (response.status === 200) {
 
-                localStorage.setItem("username", response.data.username)
-                localStorage.setItem("accesslevelId", response.data.accesslevelId)
+                localStorage.setItem("userName", response.data.userName)
+                localStorage.setItem("accessLevelId", response.data.accessLevelId)
                 localStorage.setItem("token", response.data.token)
 
                 // console.log(response.data.token)
                 // console.log("Login successful. You are logged in as: ")
                 // console.log(response)
 
-                setLoggedInUser(response.data.UserName)
+                setLoggedInUser(response.data.userName)
 
                 setMessage(`Logged in as: ${userForAuth.userName}`)
                 setIsPositive(true)
@@ -59,10 +59,10 @@ const Login = ({setIsPositive, setShowMessage, setMessage}) => {
 
         <form onSubmit={handleSubmit}>
             <div>
-                <input type='text' value={UserName} onChange={({target}) => setUserName(target.value)} placeholder='Username'/>
+                <input type='text' value={userName} onChange={({target}) => setUserName(target.value)} placeholder='Username'/>
             </div>
             <div>
-                <input type='password' value={PassWord} onChange={({target}) => setPassWord(target.value)} placeholder='Password'/>
+                <input type='password' value={passWord} onChange={({target}) => setPassWord(target.value)} placeholder='Password'/>
             </div>
             <input type='submit' value='Login'/>
             <input type='button' value='Empty' onClick={() => emptyFields()}/>

@@ -3,7 +3,6 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import Laskuri from './Laskuri'
-import Viesti from './Viesti'
 import Posts from './Posts'
 import CustomerList  from './CustomerList'
 import Message from './Message'
@@ -27,7 +26,7 @@ const huomio = () => {
 } 
 
 useEffect(() => {
-  let storedUser = localStorage.getItem("UserName")
+  let storedUser = localStorage.getItem("userName")
   if (storedUser !== null) {
     setLoggedInUser(storedUser)
   }
@@ -41,18 +40,19 @@ const logOut = () => {
   return (
     <div className="App">
 
-      {/* {!loggedInUser && */}
-       <Login setMessage={setMessage} setIsPositive={setIsPositive} setShowMessage={setShowMessage}/>
-       {/* } */}
+      {!loggedInUser &&
+       <Login setMessage={setMessage} setIsPositive={setIsPositive} setShowMessage={setShowMessage} setLoggedInUser={setLoggedInUser}/>
+       }
 
-      {/* {loggedInUser && */}
+      {loggedInUser &&
       <Router>
         <Navbar bg="dark" variant="dark">
-          <Nav className="navi">
+          <Nav className="mr-auto">
             <Nav.Link href='/customers'>Customers</Nav.Link>
             <Nav.Link href='/posts'>Posts</Nav.Link>
             <Nav.Link href='/users'>Users</Nav.Link>
             <Nav.Link href='/laskuri'>Laskuri</Nav.Link>
+            <button onClick={() => logOut()}>Logout</button>
           </Nav>
         </Navbar>
 
@@ -69,7 +69,7 @@ const logOut = () => {
       </Routes>
       </Router>
 
-      {/* } */}
+      }
     </div>
   )
 }
