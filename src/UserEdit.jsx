@@ -25,7 +25,7 @@ const UserEdit = ({setMuokkaustila, muokattavaUser, setIsPositive, setShowMessag
         }
 
         const token = localStorage.getItem('token')
-        CustomerService.setToken(token)
+        UserService.setToken(token)
 
         UserService.update(editUser)
         .then(response => {

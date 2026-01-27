@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = "https://localhost:7167/api/Users"
+const baseUrl = "https://localhost:7167/api/Products"
 
 let token = null
 
@@ -15,11 +15,11 @@ const getAll = () => {
     return request.then(response => response.data)
 }
 
-const create = newUser => {
+const create = newProd => {
            const config = {
         headers: {Authorization: token}
     }
-return axios.post(baseUrl, newUser, config)
+return axios.post(baseUrl, newProd, config)
 }
 
 const remove = id => {
@@ -33,7 +33,7 @@ const update = (object) => {
         const config = {
         headers: {Authorization: token}
     }
-    return axios.put(`${baseUrl}/${object.UserId}`, object, config)
+    return axios.put(`${baseUrl}/${object.ProductId}`, object, config)
 }
 
 export default {getAll, create, remove, update, setToken}

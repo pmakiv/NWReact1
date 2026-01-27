@@ -9,45 +9,45 @@ const User = ({user, editUser, setIsPositive, setShowMessage, setMessage, reload
 
 const [showDetails, setShowDetails] = useState(false)
 
-const deleteUser = (user) => {
-    //vaihtoehtoinen toteutustapa:
-    // if (window.confirm(`Remove customer ${customer.companyName}?`) === true) {
-    let answer = window.confirm(`Remove user ${user.UserName}?`)
-    if (answer === true) {
-    UserService.remove(user.UserId)
-    .then(res => {
-        if (res.status === 200) {
-          setMessage(`Removed user ${user.UserName} successfully.`)  
-            setIsPosivite(true)
-            setShowMessage(true)
-            window.scrollBy(0, -10000)
-              setTimeout(() => {
-                setShowMessage(false)
-            }, 5000)
-            reloadNow(!reload)
-        }
-    }
-    )
-    .catch(error => {
-            setMessage(error)
-            setIsPositive(false)
-            setShowMessage(true)
-            setTimeout(() => {
-                setShowMessage(false)
-            }, 5000)
-        })
-    }
-    else {
-        setMessage('Deleting cancelled successfully.')
-        setIsPositive(true)
-        setShowMessage(true)
-        window.scrollBy(0, -10000)
-        setTimeout (() => {
-            setShowMessage(false)},
-            5000)
-        }
+// const deleteUser = (user) => {
+//     //vaihtoehtoinen toteutustapa:
+//     // if (window.confirm(`Remove customer ${customer.companyName}?`) === true) {
+//     let answer = window.confirm(`Remove user ${user.UserName}?`)
+//     if (answer === true) {
+//     UserService.remove(user.UserId)
+//     .then(res => {
+//         if (res.status === 200) {
+//           setMessage(`Removed user ${user.UserName} successfully.`)  
+//             setIsPosivite(true)
+//             setShowMessage(true)
+//             window.scrollBy(0, -10000)
+//               setTimeout(() => {
+//                 setShowMessage(false)
+//             }, 5000)
+//             reloadNow(!reload)
+//         }
+//     }
+//     )
+//     .catch(error => {
+//             setMessage(error)
+//             setIsPositive(false)
+//             setShowMessage(true)
+//             setTimeout(() => {
+//                 setShowMessage(false)
+//             }, 5000)
+//         })
+//     }
+//     else {
+//         setMessage('Deleting cancelled successfully.')
+//         setIsPositive(true)
+//         setShowMessage(true)
+//         window.scrollBy(0, -10000)
+//         setTimeout (() => {
+//             setShowMessage(false)},
+//             5000)
+//         }
         
-    }
+//     }
 
 
   return (

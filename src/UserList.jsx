@@ -16,9 +16,6 @@ const [reload, reloadNow] = useState(false)
 const [muokattavaUser, setMuokattavaUser] = useState(false)
 const [search, setSearch] = useState("")
 
-        const token = localStorage.getItem('token')
-        CustomerService.setToken(token)
-
 useEffect(()=> {
   
     UserService.getAll()
@@ -37,6 +34,44 @@ const editUser = (user) => {
     setMuokattavaUser (user)
     setMuokkaustila(true)
 }
+
+const deleteUser = (user) => {
+    let answer = window.confirm(`Remove user ${user.userName}?`)
+    if (answer === true) {
+    UserService.remove(user.userId)
+    .then(res => {
+        if (res.status === 200) {
+          setMessage(`Removed user ${user.userName} successfully.`)  
+            setIsPosivite(true)
+            setShowMessage(true)
+            window.scrollBy(0, -10000)
+              setTimeout(() => {
+                setShowMessage(false)
+            }, 5000)
+            reloadNow(!reload)
+        }
+    }
+    )
+    .catch(error => {
+            setMessage(error)
+            setIsPositive(false)
+            setShowMessage(true)
+            setTimeout(() => {
+                setShowMessage(false)
+            }, 5000)
+        })
+    }
+    else {
+        setMessage('Deleting cancelled successfully.')
+        setIsPositive(true)
+        setShowMessage(true)
+        window.scrollBy(0, -10000)
+        setTimeout (() => {
+            setShowMessage(false)},
+            5000)
+        }
+        
+    }
 
   return (
     <>
@@ -57,8 +92,10 @@ const editUser = (user) => {
                     <tr>
                     <th>First name</th>
                     <th>Last name</th>
+                    <th>Username</th>
                     <th>Email</th>
                     <th>Access level</th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -71,8 +108,11 @@ const editUser = (user) => {
                             <tr key={u.userId}>
                                 <td>{u.firstName}</td>
                                 <td>{u.lastName}</td>
+                                <td>{u.userName}</td>
                                 <td>{u.email}</td>
                                 <td>{u.accessLevelId}</td>
+                                <td><button onClick={() => editUser(u.userId)}>Edit</button></td>
+                                <td><button onClick={() => deleteUser(u.UserId)}>Delete</button></td>
                             </tr>
                             )
                         }
