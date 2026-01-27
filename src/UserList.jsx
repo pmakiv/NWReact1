@@ -111,8 +111,8 @@ const deleteUser = (user) => {
                                 <td>{u.userName}</td>
                                 <td>{u.email}</td>
                                 <td>{u.accessLevelId}</td>
-                                <td><button onClick={() => editUser(u.userId)}>Edit</button></td>
-                                <td><button onClick={() => deleteUser(u.UserId)}>Delete</button></td>
+                                <td><button onClick={() => editUser(u)}>Edit</button></td>
+                                <td><button onClick={() => deleteUser(u)}>Delete</button></td>
                             </tr>
                             )
                         }
