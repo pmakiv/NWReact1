@@ -16,7 +16,7 @@ const deleteProduct = (product) => {
     ProductService.remove(product.productId)
     .then(res => {
         if (res.status === 200) {
-          setMessage(`Removed product ${product.productName} successfully.`)  
+          setMessage("Removed product " + product.productName + " successfully.") 
             setIsPosivite(true)
             setShowMessage(true)
             window.scrollBy(0, -10000)

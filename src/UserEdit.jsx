@@ -12,16 +12,18 @@ const UserEdit = ({setMuokkaustila, muokattavaUser, setIsPositive, setShowMessag
     const [editEmail, setNewEmail] = useState(muokattavaUser.email);
     const [editAccessLevelId, setNewAccessLevelId] = useState(muokattavaUser.accessLevelId);
     const [editUserName, setUserName] = useState(muokattavaUser.userName);
+    const [editPassWord, setPassWord] = useState(muokattavaUser.md5(PassWord));
 
     const handleSubmit = (event) => {
         event.preventDefault();
         var editUser = {
-            UserId: editUserId,
+            // UserId: editUserId,
             FirstName: editFirstName,
             LastName: editLastName,
             Email: editEmail,
-            AccessLevelId: editAccessLevelId,
+            // AccessLevelId: editAccessLevelId,
             UserName: editUserName,
+            PassWord: editPassWord
         }
 
         const token = localStorage.getItem('token')
@@ -76,6 +78,10 @@ const UserEdit = ({setMuokkaustila, muokattavaUser, setIsPositive, setShowMessag
             <label>Username</label>
             <div>
                 <input type='text' value={editUserName} onChange={({target}) => setNewUserName(target.value)} placeholder='Username'/>
+            </div>
+             <label>Password</label>
+            <div>
+                <input type='text' value={md5(editPassWord)} onChange={({target}) => setNewPassWord(target.value)} placeholder='Password'/>
             </div>
             <input type='submit' value='save'/>
             <input type='button' value='back' onClick={() => setMuokkaustila(false)}/>

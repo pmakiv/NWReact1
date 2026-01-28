@@ -54,7 +54,8 @@ const logOut = () => {
             <Nav.Link href='/users'>Users</Nav.Link>
             <Nav.Link href='/laskuri'>Laskuri</Nav.Link>
             <Nav.Link href='/products'>Products</Nav.Link>
-            <button onClick={() => logOut()}>{loggedInUser}<br/>Logout</button>
+            <Nav.Link type="button" onClick={() => logOut()}>{loggedInUser}<br/>Logout</Nav.Link>
+            {/* <button onClick={() => logOut()}>{loggedInUser}<br/>Logout</button> */}
           </Nav>
         </Navbar>
 

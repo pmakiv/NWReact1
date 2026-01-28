@@ -20,7 +20,7 @@ const ProductAdd = ({setLisaystila, setIsPositive, setShowMessage, setMessage}) 
     const handleSubmit = (event) => {
         event.preventDefault();
         var newProduct = {
-            // ProductId: newProductId.toUpperCase(),
+            // ProductId: newProductId,
             ProductName: newProductName,
             SupplierId: newSupplierId,
             CategoryId: newCategoryId,
@@ -29,7 +29,7 @@ const ProductAdd = ({setLisaystila, setIsPositive, setShowMessage, setMessage}) 
             UnitsInStock: newUnitsInStock,
             UnitsOnOrder: newUnitsOnOrder,
             ReorderLevel: newReorderLevel,
-            // Discontinued: newDiscontinued,
+            // Discontinued: newDiscontinued
         }
 
         const token = localStorage.getItem('token')
@@ -61,10 +61,9 @@ const ProductAdd = ({setLisaystila, setIsPositive, setShowMessage, setMessage}) 
         <h2>Add product:</h2>
 
         <form onSubmit={handleSubmit}>
-            {/* <div>
-                <input type='text' value={newProductId} onChange={({target}) => setNewProductId(target.value)}
-                 placeholder='ProductID, 5 numbers' minLength="5" maxLength="5"/>
-            </div> */}
+            <div>
+                <input type='hidden' value={newProductId} onChange={({target}) => setNewProductId(target.value)}/>
+            </div>
             <div>
                 <input type='text' value={newProductName} onChange={({target}) => setNewProductName(target.value)} placeholder='Product name'/>
             </div>
@@ -89,9 +88,9 @@ const ProductAdd = ({setLisaystila, setIsPositive, setShowMessage, setMessage}) 
             <div>
                 <input type='text' value={newReorderLevel} onChange={({target}) => setNewReorderLevel(target.value)} placeholder='Reorder level'/>
             </div>
-            {/* <div>
-                <input type='text' value={newDiscontinued} onChange={({target}) => setNewDiscontinued(target.value)} placeholder='Discontinued'/>
-            </div> */}
+            <div>
+                <input type='hidden' value={newDiscontinued} onChange={({target}) => setNewDiscontinued(target.value)} placeholder='Discontinued'/>
+            </div>
             <input type='submit' value='save'/>
             <input type='button' value='back' onClick={() => setLisaystila(false)}/>
         </form>
