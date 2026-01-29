@@ -48,7 +48,7 @@ const token = localStorage.getItem('token')
             }
         })
         .catch(error => {
-            setMessage("Error, something went wrong.")
+            setMessage(error)
             setIsPositive(false)
             setShowMessage(true)
             setTimeout(() => {

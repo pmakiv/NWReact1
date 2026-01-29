@@ -18,7 +18,7 @@ const deleteCustomer = (customer) => {
     .then(res => {
         if (res.status === 200) {
           setMessage(`Removed customer ${customer.companyName} successfully.`)  
-            setIsPosivite(true)
+            setIsPositive(true)
             setShowMessage(true)
             window.scrollBy(0, -10000)
               setTimeout(() => {

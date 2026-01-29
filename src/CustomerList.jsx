@@ -10,7 +10,7 @@ import CustomerEdit from './CustomerEdit'
 const CustomerList = ({setIsPositive, setShowMessage, setMessage}) => {
 
 const [customers, setCustomers] = useState([])
-const [showCustomers, setShowCustomers] = useState(false)
+const [showCustomers, setShowCustomers] = useState(true)
 const [lisaystila, setLisaystila] = useState(false)
 const [muokkaustila, setMuokkaustila] = useState(false)
 const [reload, reloadNow] = useState(false)
@@ -30,7 +30,7 @@ useEffect(()=> {
 )
 
 const handleSearchInputChange = (event) => {
-    setShowCustomers(true)
+    // setShowCustomers(true)
     setSearch(event.target.value.toLowerCase())
 }
 
@@ -41,9 +41,8 @@ const editCustomer = (customer) => {
 
   return (
     <>
-<h2><nobr style={{ cursor: 'pointer'}}
-        onClick={() => setShowCustomers(!showCustomers)}>Customers</nobr>
-
+<h2><nobr>Customers</nobr>
+<br/>
         {!lisaystila && <button className='nappi' onClick={() => setLisaystila(true)}>Add new</button>}
 </h2>
         {lisaystila && <CustomerAdd  setLisaystila={setLisaystila} 

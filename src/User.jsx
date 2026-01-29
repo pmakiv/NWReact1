@@ -70,7 +70,7 @@ const [showDetails, setShowDetails] = useState(false)
             <tbody>
                 <tr>
                     <td>{user.firstName}</td>
-                    <td>{user.lastTitle}</td>
+                    <td>{user.lastName}</td>
                     <td>{user.email}</td>
                     <td>{user.userName}</td>
                     <td>{user.accessLevelId}</td>

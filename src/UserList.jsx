@@ -31,7 +31,7 @@ const handleSearchInputChange = (event) => {
 }
 
 const editUser = (user) => {
-    setMuokattavaUser (user)
+    setMuokattavaUser(user)
     setMuokkaustila(true)
 }
 
@@ -41,8 +41,8 @@ const deleteUser = (user) => {
     UserService.remove(user.userId)
     .then(res => {
         if (res.status === 200) {
-          setMessage(`Removed user ${user.userName} successfully.`)  
-            setIsPosivite(true)
+          setMessage("Removed user " + user.userName + " successfully.")  
+            setIsPositive(true)
             setShowMessage(true)
             window.scrollBy(0, -10000)
               setTimeout(() => {
@@ -62,7 +62,7 @@ const deleteUser = (user) => {
         })
     }
     else {
-        setMessage('Deleting cancelled successfully.')
+        setMessage('Deleting cancelled.')
         setIsPositive(true)
         setShowMessage(true)
         window.scrollBy(0, -10000)
@@ -76,6 +76,7 @@ const deleteUser = (user) => {
   return (
     <>
 <h2><nobr>Users</nobr>
+<br/>
 
         {lisaystila && <UserAdd setLisaystila={setLisaystila}
         setIsPositive={setIsPositive} setMessage={setMessage} setShowMessage={setShowMessage}/>}
@@ -83,9 +84,26 @@ const deleteUser = (user) => {
         {!lisaystila && <button className='nappi' onClick={() => setLisaystila(true)}>Add new</button>}
 </h2>
         {!lisaystila && !muokkaustila &&
-            <input placeholder="Search by last name" value={search} onChange={handleSearchInputChange}/>
+            <input placeholder="Search by username" value={search} onChange={handleSearchInputChange}/>
         }        
 
+        {muokkaustila && <UserEdit  setMuokkaustila={setMuokkaustila} 
+        setIsPositive={setIsPositive} setMessage={setMessage} setShowMessage={setShowMessage}
+        muokattavaUser={muokattavaUser} />}
+        {/* {
+            !lisaystila && !muokkaustila && showCustomers && customers && customers.map(c =>
+                { 
+                const lowerCaseName = c.companyName.toLowerCase()
+            if (lowerCaseName.indexOf(search) > -1) {
+                    return (
+                <Customer key={c.customerId} customer={c} reloadNow={reloadNow} reload={reload}
+                setIsPositive={setIsPositive} setShowMessage={setShowMessage} setMessage={setMessage}
+                editCustomer={editCustomer} />
+                        )
+                    }
+                }
+            )
+        } */}
         {!lisaystila && !muokkaustila &&
             <table id='userTable'>
                 <thead>
@@ -102,7 +120,7 @@ const deleteUser = (user) => {
             
             {users && users.map(u =>
                     { 
-                    const lowerCaseName = u.lastName.toLowerCase()
+                    const lowerCaseName = u.userName.toLowerCase()
                 if (lowerCaseName.indexOf(search) > -1) {
                         return (
                             <tr key={u.userId}>

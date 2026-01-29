@@ -48,7 +48,7 @@ const ProductAdd = ({setLisaystila, setIsPositive, setShowMessage, setMessage}) 
             }
         })
         .catch(error => {
-            setMessage("Error, something went wrong.")
+            setMessage(error)
             setIsPositive(false)
             setShowMessage(true)
             setTimeout(() => {

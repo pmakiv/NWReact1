@@ -10,7 +10,7 @@ import ProductEdit from './ProductEdit'
 const ProductList = ({setIsPositive, setShowMessage, setMessage}) => {
 
 const [products, setProducts] = useState([])
-const [showProducts, setShowProducts] = useState(false)
+const [showProducts, setShowProducts] = useState(true)
 const [lisaystila, setLisaystila] = useState(false)
 const [muokkaustila, setMuokkaustila] = useState(false)
 const [reload, reloadNow] = useState(false)
@@ -30,7 +30,7 @@ useEffect(()=> {
 )
 
 const handleSearchInputChange = (event) => {
-    setShowProducts(true)
+    // setShowProducts(true)
     setSearch(event.target.value.toLowerCase())
 }
 
@@ -41,9 +41,8 @@ const editProduct = (product) => {
 
   return (
     <>
-<h2><nobr style={{ cursor: 'pointer'}}
-        onClick={() => setShowProducts(!showProducts)}>Products</nobr>
-
+<h2><nobr>Products</nobr>
+<br/>
         {!lisaystila && <button className='nappi' onClick={() => setLisaystila(true)}>Add new</button>}
 </h2>
         {lisaystila && <ProductAdd  setLisaystila={setLisaystila} 

@@ -2,28 +2,29 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import React, {useState} from 'react'
 import './App.css'
+import md5 from 'md5'
 import UserService from './services/User'
 
 const UserEdit = ({setMuokkaustila, muokattavaUser, setIsPositive, setShowMessage, setMessage}) => {
 
     const [editUserId, setNewUserId] = useState(muokattavaUser.userId);
-    const [editFirstName, setNewFirstName] = useState(muokattavaUser.FirstName);
+    const [editFirstName, setNewFirstName] = useState(muokattavaUser.firstName);
     const [editLastName, setNewLastName] = useState(muokattavaUser.lastName);
     const [editEmail, setNewEmail] = useState(muokattavaUser.email);
     const [editAccessLevelId, setNewAccessLevelId] = useState(muokattavaUser.accessLevelId);
-    const [editUserName, setUserName] = useState(muokattavaUser.userName);
-    const [editPassWord, setPassWord] = useState(muokattavaUser.md5(PassWord));
+    const [editUserName, setNewUserName] = useState(muokattavaUser.userName);
+    const [editPassWord, setNewPassWord] = useState(muokattavaUser.passWord);
 
     const handleSubmit = (event) => {
         event.preventDefault();
         var editUser = {
-            // UserId: editUserId,
+            UserId: editUserId,
             FirstName: editFirstName,
             LastName: editLastName,
             Email: editEmail,
-            // AccessLevelId: editAccessLevelId,
+            AccessLevelId: editAccessLevelId,
             UserName: editUserName,
-            PassWord: editPassWord
+            PassWord: md5(editPassWord)
         }
 
         const token = localStorage.getItem('token')
@@ -71,17 +72,20 @@ const UserEdit = ({setMuokkaustila, muokattavaUser, setIsPositive, setShowMessag
             <div>
                 <input type='email' value={editEmail} onChange={({target}) => setNewEmail(target.value)} placeholder='Email'/>
             </div>
-            <label>Acceess level ID</label>
+
+            {/* Tähän joku accesslevelin näkyvyyttä rajoittava väliin.                                                                           <------------------------------------------ */}
+
+            <label>Access level ID</label>
             <div>
-                <input type='text' value={editAccessLevelId} onChange={({target}) => setNewAccessLevelId(target.value)} placeholder='Access level ID'/>
+                <input type='text' value={editAccessLevelId} disabled/>
             </div>
             <label>Username</label>
             <div>
                 <input type='text' value={editUserName} onChange={({target}) => setNewUserName(target.value)} placeholder='Username'/>
-            </div>
-             <label>Password</label>
+            </div><br/>
+             <label>Give password to save changes:</label>
             <div>
-                <input type='text' value={md5(editPassWord)} onChange={({target}) => setNewPassWord(target.value)} placeholder='Password'/>
+                <input type='password' required value={editPassWord} onChange={({target}) => setNewPassWord(target.value)} placeholder='Password'/>
             </div>
             <input type='submit' value='save'/>
             <input type='button' value='back' onClick={() => setMuokkaustila(false)}/>

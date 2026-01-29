@@ -8,6 +8,7 @@ import axios from 'axios'
 
 const UserAdd = ({setLisaystila, setIsPositive, setShowMessage, setMessage}) => {
 
+    const [newUserId, setNewUserId] = useState('');
     const [newFirstName, setNewFirstName] = useState('');
     const [newLastName, setNewLastName] = useState('');
     const [newEmail, setNewEmail] = useState('');
@@ -21,11 +22,10 @@ const UserAdd = ({setLisaystila, setIsPositive, setShowMessage, setMessage}) => 
             FirstName: newFirstName,
             LastName: newLastName,
             Email: newEmail,
-            AccessLevelId: parseInt(newAccessLevelId),
+            AccessLevelId: newAccessLevelId,
             UserName: newUserName,
             PassWord: md5(newPassWord)
         }
-        console.log(newUser)
 
         const token = localStorage.getItem('token')
                 UserService.setToken(token)
@@ -33,7 +33,7 @@ const UserAdd = ({setLisaystila, setIsPositive, setShowMessage, setMessage}) => 
         UserService.create(newUser)
         .then(response => {
             if (response.status === 200) {
-                setMessage(`Added new user: ${newUser.FirstName} ${newUser.LastName} with username ${newUser.UserName}.`)
+                setMessage("Added new user: " + newUser.FirstName + " " + newUser.LastName + " with username " + newUser.UserName + ".")
                 setIsPositive(true)
                 setShowMessage(true)
                 setTimeout(() => {
@@ -56,6 +56,9 @@ const UserAdd = ({setLisaystila, setIsPositive, setShowMessage, setMessage}) => 
         <h2>Add user:</h2>
 
         <form onSubmit={handleSubmit}>
+             <div>
+                <input type='hidden' value={newUserId} onChange={({target}) => setNewUserId(target.value)}/>
+            </div>
             <div>
                 <input type='text' value={newFirstName} onChange={({target}) => setNewFirstName(target.value)} placeholder='First name'/>
             </div>
@@ -65,9 +68,9 @@ const UserAdd = ({setLisaystila, setIsPositive, setShowMessage, setMessage}) => 
             <div>
                 <input type='email' value={newEmail} onChange={({target}) => setNewEmail(target.value)} placeholder='Email'/>
             </div>
-            <div>
+            {/* <div>
                 <input type='number' value={newAccessLevelId} onChange={({target}) => setNewAccessLevelId(target.value)} placeholder='Access level ID'/>
-            </div>
+            </div> */}
             <div>
                 <input type='text' value={newUserName} onChange={({target}) => setNewUserName(target.value)} placeholder='Username'/>
             </div>
