@@ -72,12 +72,9 @@ const UserEdit = ({setMuokkaustila, muokattavaUser, setIsPositive, setShowMessag
             <div>
                 <input type='email' value={editEmail} onChange={({target}) => setNewEmail(target.value)} placeholder='Email'/>
             </div>
-
-            {/* Tähän joku accesslevelin näkyvyyttä rajoittava väliin.                                                                           <------------------------------------------ */}
-
             <label>Access level ID</label>
             <div>
-                <input type='text' value={editAccessLevelId} disabled/>
+                <input type='text' value={editAccessLevelId} onChange={({target}) => setNewAccessLevelId(target.value)} placeholder='Accesslevel ID'/>
             </div>
             <label>Username</label>
             <div>

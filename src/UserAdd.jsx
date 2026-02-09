@@ -1,6 +1,6 @@
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import './App.css'
 import UserService from './services/User'
 import md5 from 'md5'
@@ -15,6 +15,37 @@ const UserAdd = ({setLisaystila, setIsPositive, setShowMessage, setMessage}) => 
     const [newAccessLevelId, setNewAccessLevelId] = useState(2);
     const [newUserName, setNewUserName] = useState('');
     const [newPassWord, setNewPassWord] = useState('');
+    const [passWord1, setPassWord1] = useState('');
+    const [passWord2, setPassWord2] = useState('');
+    const [check, setCheck] = useState(false);
+    const [passWordResult, setPassWordResult] = useState('');
+
+    useEffect (() => {
+        if(!passWord1 || !passWord2) {
+            setPassWordResult('');
+            setMessage('');
+            setCheck('');
+            setIsPositive('');
+        }
+        else if(passWord1 === passWord2) {
+            setPassWordResult('Passwords match!');
+            setCheck(true);
+            setMessage('Passwords match!');
+            setIsPositive(true);
+            setShowMessage (true);
+        }
+        else {
+            setPassWordResult("Password do not match!")
+            setCheck(false);
+            setMessage('Please check that passwords match.');
+            setIsPositive(false);
+            setShowMessage (true), 3000;
+        }
+        return() => {
+            setShowMessage(false);
+            setIsPositive(true);
+        };
+    }, [passWord1, passWord2]);
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -38,7 +69,7 @@ const UserAdd = ({setLisaystila, setIsPositive, setShowMessage, setMessage}) => 
                 setShowMessage(true)
                 setTimeout(() => {
                     setShowMessage(false)
-                }, 5000)
+                }, 35000)
                 setLisaystila(false)
             }
         })
@@ -75,7 +106,13 @@ const UserAdd = ({setLisaystila, setIsPositive, setShowMessage, setMessage}) => 
                 <input type='text' value={newUserName} onChange={({target}) => setNewUserName(target.value)} placeholder='Username'/>
             </div>
             <div>
-                <input type='password' value={newPassWord} onChange={({target}) => setNewPassWord(target.value)} placeholder='Password'/>
+                <input type='password' value={passWord1} onChange={(e) => setPassWord1(e.target.value)} placeholder='Password'/>
+            </div>
+            <div>
+                <input type='password' value={passWord2} onChange={(e) => setPassWord2(e.target.value)} placeholder='Re-enter password'/>
+            </div>
+            <div title={check ? "Password Ok" : "Password Not Ok"}>
+                
             </div>
             <input type='submit' value='save'/>
             <input type='button' value='back' onClick={() => setLisaystila(false)}/>

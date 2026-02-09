@@ -4,11 +4,14 @@ import React, {useState} from 'react'
 import './App.css'
 import LoginService from './services/Auth'
 import md5 from 'md5'
+import UserAdd from './UserAdd'
 
 const Login = ({setIsPositive, setShowMessage, setMessage, setLoggedInUser}) => {
 
     const [userName, setUserName] = useState('');
     const [passWord, setPassWord] = useState('');
+    const [lisaystila, setLisaystila] = useState(false)
+    const [loginStatus, setLoginStatus] = useState(true)
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -54,10 +57,11 @@ const Login = ({setIsPositive, setShowMessage, setMessage, setLoggedInUser}) => 
             setPassWord("")
         }
   return (
-    <div id='loginWindow'>
+    <div id='loginWindow' >
         <h2>Login:</h2>
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} loginStatus>
+            
             <div>
                 <input type='text' value={userName} onChange={({target}) => setUserName(target.value)} placeholder='Username'/>
             </div>
@@ -67,7 +71,11 @@ const Login = ({setIsPositive, setShowMessage, setMessage, setLoggedInUser}) => 
             <input type='submit' value='Login'/>
             <input type='button' value='Empty' onClick={() => emptyFields()}/>
         </form>
+        <br/>
+         {!lisaystila && loginStatus && <button className='nappi' onClick={() => setLisaystila(true)}>Register</button>}
 
+        {lisaystila && <UserAdd  setLisaystila={setLisaystila} setLoginStatus={setLoginStatus}
+        setIsPositive={setIsPositive} setMessage={setMessage} setShowMessage={setShowMessage} />}
     </div>
   )
 }
